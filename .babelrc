@@ -1,0 +1,17 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        "vue",
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}
