@@ -53,6 +53,22 @@ jobs:
           args: deploy --dir=dist --prod
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
+      - name: Notifica no Discord - sucesso
+        uses: appleboy/discord-action@master
+        if: ${{ success() }}
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          message: Após ${{ github.event_name }} o deploy foi feito na Netlify. 🚀
+
+      - name: Notifica no Discord - falha
+        uses: appleboy/discord-action@master
+        if: ${{ failure() }}
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          message: Após ${{ github.event_name }} o deploy na Netlify falhou. 🚨
+
       # - name: Notifica no Telegram - sucesso
       #   uses: appleboy/telegram-action@master
       #   if: ${{ success() }}
