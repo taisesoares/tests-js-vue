@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 16.3.x
+          node-version: 12.22.x
 
       - uses: actions/cache@v2
         id: yarn-cache
@@ -53,20 +53,20 @@ jobs:
           args: deploy --dir=dist --prod
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
-      - name: Notifica no Telegram - sucesso
-        uses: appleboy/telegram-action@master
-        if: ${{ success() }}
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            Após ${{ github.event_name }} o deploy foi feito na Netlify. 🚀
+      # - name: Notifica no Telegram - sucesso
+      #   uses: appleboy/telegram-action@master
+      #   if: ${{ success() }}
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_TO }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: |
+      #       Após ${{ github.event_name }} o deploy foi feito na Netlify. 🚀
 
-      - name: Notifica no Telegram - falha
-        uses: appleboy/telegram-action@master
-        if: ${{ failure() }}
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            Após ${{ github.event_name }} o deploy na Netlify falhou. 🚨
+      # - name: Notifica no Telegram - falha
+      #   uses: appleboy/telegram-action@master
+      #   if: ${{ failure() }}
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_TO }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: |
+      #       Após ${{ github.event_name }} o deploy na Netlify falhou. 🚨
